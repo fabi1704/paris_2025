@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+
+<!-- Header-->
+ <header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Billing Information</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Enter your payment</p>
+        </div>
+    </div>
+</header>
+<br/>
+<div class="container">
+    <div class="'row">
+        <center>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                      Order Summary
+                    </div>
+                    <div class="card-body">
+                        {% for product in cart_products %}
+                            {{ product }}</br>
+                            {{ product.solo_price }}</br>
+                            
+                            Quantity:
+                            {% for key, value in quantities.items %}
+                                {% if key == product.id|slugify %}
+                                    {{ value }}</br>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        Total : {{ totals }}
+                    </br>
+                    </br>
+                    <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
+                    </div>
+                </div>
+                </br>
+            </div>
+    </div>
+</center>
+<center>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+            Billing info
+            </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'process_order' %}">
+                        {% csrf_token %}
+                    {{ billing_form.as_p }}
+                </div>
+        </div>
+            </br>
+            </br> 
+             <button type="'submit" class="btn btn-secondary">Payment</button>
+                    </form>
+    </div>
+</div>
+</center>
+</br>
+</br>
+
+
+
+
+{% endblock %}

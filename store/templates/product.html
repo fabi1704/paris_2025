@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content%}
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<div class="container">
+    <br/>
+    <div class="card bg-light mb-4">
+        <div class="row g-0">
+        <center>
+            <div class="col-md-6">
+                <img src="{{ product.image.url }}" class="img-fluid" alt="Category image might be missing">
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                <h4 class="card-title">{{ product.category }}</h4>
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text">Ticket solo : {{ product.solo_price}} euros</p>
+                <p class="card-text">Ticket duo : {{ product.duo_price }} euros</p>
+                <p class="card-text">Ticket Family (2 adults + 2 children) : {{ product.family_price }} euros</p>
+                
+                <br/>
+                <br/>
+                <div class="row-justify-content-center">
+                    <div class="col-md-2">Quantity : </div>
+                    <div class="col-md-2">
+                <select class="form-select form-select-sm" id="qty-cart">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    </select>
+                    </div>
+                </div>
+                
+                
+                <br/>
+                <br/>
+
+
+                <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
+
+                <button type="button" value="{{  product.id  }}" class="btn btn-secondary" id="add-cart">Add Solo to cart</button>
+                <button type="button" value="{{  product.id  }}" class="btn btn-secondary" id="add-cart">Add Duo to cart</button>
+                <button type="button" value="{{  product.id  }}" class="btn btn-secondary" id="add-cart">Add Family to cart</button>
+            </div>
+        </center>
+        </div>
+    </div>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<script>
+//Check if button pressed
+$(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url "cart_add" %}',
+        data: {
+            product_id: $('#add-cart').val(),
+            product_qty: $('#qty-cart option:selected').text(),
+            csrfmiddlewaretoken: '{{ csrf_token  }}',
+            action: 'post'
+        },
+        success: function(json){
+            //console.log(json)
+            document.getElementById('cart_quantity').textContent = json.qty
+            
+        },
+        error: function(xhr, errmsg,err){
+
+        }
+
+    });
+
+
+
+})
+
+
+
+
+
+</script>
+
+{% endblock %}
