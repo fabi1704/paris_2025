@@ -82,6 +82,7 @@ def process_order(request):
         cart_products = cart.get_prods
         quantities = cart.get_quants
         totals = cart.cart_total()
+        amount_paid = cart.cart_total()
 
         # let's gather order information
         if request.user.is_authenticated:
