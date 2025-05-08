@@ -18,7 +18,7 @@ SECRET_KEY = "django-insecure-j9k8zonj0@+v%4h&at(ke+d&=a0j!e*4ln0!1ycia*2#%zj8eu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True #False #True
 
-ALLOWED_HOSTS = ['paris_2025.railway.internal','https://paris_2025.railway.internal' ]
+ALLOWED_HOSTS = ['127.0.0.1','paris_2025.railway.internal','https://paris_2025.railway.internal' ]
 CSRF_TRUSTED_ORIGINS = ['https://paris_2025.railway.internal']
 
 
@@ -45,7 +45,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMidellware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "paris_2025.urls"
@@ -76,16 +76,16 @@ WSGI_APPLICATION = "paris_2025.wsgi.application"
 DATABASES = {
     "default": {
         # Comment the 2 lines i might want to use that sq-lite database again
-        #"ENGINE": "django.db.backends.sqlite3",
-        #"NAME": BASE_DIR / "db.sqlite3",
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': os.environ.get('DB_PASSWORD_YO'),
-        'HOST': 'postgres.railway.internal',
-        'PORT': '5432',
-        'DATABASE': 'railway',
-        'DATABASE_URL': 'postgresql://postgres:mBdIfbFBZCMrBInfplcnBygJhUhsgTqP@postgres.railway.internal:5432/railway',
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'railway',
+        #'USER': 'postgres',
+        #'PASSWORD': os.environ.get('DB_PASSWORD_YO'),
+        #'HOST': 'postgres.railway.internal',
+        #'PORT': '5432',
+        #'DATABASE': 'railway',
+        #'DATABASE_URL': 'postgresql://postgres:mBdIfbFBZCMrBInfplcnBygJhUhsgTqP@postgres.railway.internal:5432/railway',
     }
 }
 
