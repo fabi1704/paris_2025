@@ -1,8 +1,12 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load our environmental variable
+load_dotenv()
 
 
 # Quick-start development settings - unsuitable for production
@@ -12,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-j9k8zonj0@+v%4h&at(ke+d&=a0j!e*4ln0!1ycia*2#%zj8eu"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True #False #True
 
 ALLOWED_HOSTS = []
 
@@ -68,8 +72,17 @@ WSGI_APPLICATION = "paris_2025.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        # Comment the 2 lines i might want to use that sq-lite database again
+        #"ENGINE": "django.db.backends.sqlite3",
+        #"NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': os.environ.get('DB_PASSWORD_YO'),
+        'HOST': 'postgres.railway.internal',
+        'PORT': '5432',
+        'DATABASE': 'railway',
+        'DATABASE_URL': 'postgresql://postgres:mBdIfbFBZCMrBInfplcnBygJhUhsgTqP@postgres.railway.internal:5432/railway',
     }
 }
 
